@@ -42,7 +42,11 @@ node_modules
 echo "
 $src/
 tmp/
+broc.sh
+Brocfile.js
 " >> .npmignore
+
+
 
 
 
