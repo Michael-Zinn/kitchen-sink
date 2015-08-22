@@ -1,6 +1,23 @@
 #!/bin/bash
 
-mkdir src
+# Initializes a freshly created npm module to compile CoffeeScript files using broccoli.
+# See https://github.com/RedNifre/kitchen-sink
+
+src="src"
+lib="lib"
+
+if [ $# -gt 0 ]
+	then
+		src=$1
+fi
+
+if [ $# = 2 ]
+	then
+		lib=$2
+fi
+
+
+mkdir $src
 
 
 
@@ -11,10 +28,10 @@ npm install --save-dev broccoli-coffee
 
 echo "
 # compiled javascript
-lib/
+$lib/
 
 # broccoli-timepiece temp directory
-tmp/
+$tmp/
 
 # dependencies
 node_modules
@@ -23,13 +40,13 @@ node_modules
 
 
 echo "
-src/
+$src/
 " >> .npmignore
 
 
 
 echo "#!/bin/bash
-broccoli-timepiece lib/" > broc.sh
+broccoli-timepiece $lib/" > broc.sh
 
 
 
@@ -37,4 +54,4 @@ chmod +x broc.sh
 
 
 
-echo "module.exports = require('broccoli-coffee')('src',{bare:true})" >> Brocfile.js
+echo "module.exports = require('broccoli-coffee')('$src',{bare:true})" >> Brocfile.js
