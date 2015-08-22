@@ -1,0 +1,40 @@
+#!/bin/bash
+
+mkdir src
+
+
+
+npm install --save-dev broccoli
+npm install --save-dev broccoli-coffee
+
+
+
+echo "
+# compiled javascript
+lib/
+
+# broccoli-timepiece temp directory
+tmp/
+
+# dependencies
+node_modules
+" >> .gitignore
+
+
+
+echo "
+src/
+" >> .npmignore
+
+
+
+echo "#!/bin/bash
+broccoli-timepiece lib/" > broc.sh
+
+
+
+chmod +x broc.sh
+
+
+
+echo "module.exports = require('broccoli-coffee')('src',{bare:true})" >> Brocfile.js
